@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BloodConnect AI - Mobile Mockups</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .mockup-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .phone-mockup {
+            background: #1a1a1a;
+            border-radius: 25px;
+            padding: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        
+        .phone-mockup:hover {
+            transform: scale(1);
+        }
+        
+        .screen {
+            background: white;
+            border-radius: 20px;
+            height: 600px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .status-bar {
+            background: #f8f9fa;
+            height: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .content {
+            padding: 20px;
+            height: calc(100% - 30px);
+            overflow-y: auto;
+        }
+        
+        /* Emergency Request Screen */
+        .emergency-header {
+            background: linear-gradient(135deg, #ff4757, #ff3838);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .emergency-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .emergency-header p {
+            opacity: 0.9;
+        }
+        
+        .patient-info {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .info-row:last-child { margin-bottom: 0; }
+        
+        .label {
+            font-weight: 600;
+            color: #666;
+        }
+        
+        .value {
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .ai-matching {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .spinner {
+            width: 30px;
+            height: 30px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .donor-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .donor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .donor-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .match-score {
+            background: #28a745;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .donor-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .contact-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+        }
+        
+        /* Dashboard Screen */
+        .welcome-section {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .welcome-section h2 {
+            margin-bottom: 5px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #007bff;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .action-btn {
+            background: white;
+            border: 2px solid #e9ecef;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #333;
+        }
+        
+        .action-btn:hover {
+            border-color: #007bff;
+            transform: translateY(-2px);
+        }
+        
+        .action-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .upcoming-section {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+        }
+        
+        .upcoming-section h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .appointment-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            margin-bottom: 10px;
+        }
+        
+        .appointment-date {
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 5px;
+        }
+        
+        .appointment-details {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Impact Dashboard */
+        .impact-header {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .impact-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .progress-section {
+            margin-bottom: 20px;
+        }
+        
+        .progress-item {
+            margin-bottom: 15px;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .progress-bar {
+            background: #e9ecef;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #20c997);
+            border-radius: 4px;
+        }
+        
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .achievement-card {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid #28a745;
+        }
+        
+        .achievement-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .achievement-title {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .recent-donations {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+        }
+        
+        .donation-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .donation-item:last-child {
+            border-bottom: none;
+        }
+        
+        .donation-info {
+            flex: 1;
+        }
+        
+        .donation-patient {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .donation-date {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .donation-status {
+            background: #28a745;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+        
+        .mockup-title {
+            text-align: center;
+            margin-bottom: 15px;
+            color: white;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🩸 BloodConnect AI</h1>
+            <p>Revolutionizing Blood Donation with Predictive Intelligence</p>
+        </div>
+        
+        <div class="mockup-grid">
+            <!-- Emergency Blood Request Screen -->
+            <div class="phone-mockup">
+                <div class="mockup-title">Emergency Blood Request</div>
+                <div class="screen">
+                    <div class="status-bar">
+                        <span>9:41 AM</span>
+                        <span>🔋 85%</span>
+                    </div>
+                    <div class="content">
+                        <div class="emergency-header">
+                            <h2>🚨 Emergency Request</h2>
+                            <p>AI is finding donors near you</p>
+                        </div>
+                        
+                        <div class="patient-info">
+                            <div class="info-row">
+                                <span class="label">Patient:</span>
+                                <span class="value">Priya Sharma</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">Blood Type:</span>
+                                <span class="value">O+ Negative</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">Location:</span>
+                                <span class="value">Bombay Hospital, Mumbai</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">Urgency:</span>
+                                <span class="value" style="color: #ff4757;">Critical - 2 hours</span>
+                            </div>
+                        </div>
+                        
+                        <div class="ai-matching">
+                            <div class="spinner"></div>
+                            <strong>AI Matching in Progress...</strong>
+                            <p style="font-size: 0.9rem; margin-top: 5px;">Analyzing 1,000+ donors in close radius</p>
+                        </div>
+                        
+                        <div class="donor-card">
+                            <div class="donor-header">
+                                <span class="donor-name">Rahul Seth</span>
+                                <span class="match-score">96% Match</span>
+                            </div>
+                            <div class="donor-details">
+                                <span>1.2 km away</span>
+                                <span>Available now</span>
+                                <span>10 donations</span>
+                            </div>
+                            <button class="contact-btn">📞 Contact Donor</button>
+                        </div>
+                        
+                        <div class="donor-card">
+                            <div class="donor-header">
+                                <span class="donor-name">Anjali Reddy</span>
+                                <span class="match-score">95% Match</span>
+                            </div>
+                            <div class="donor-details">
+                                <span>2.1 km away</span>
+                                <span>Available in 30 min</span>
+                                <span>25 donations</span>
+                            </div>
+                            <button class="contact-btn">📞 Contact Donor</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Patient Dashboard -->
+            <div class="phone-mockup">
+                <div class="mockup-title">Patient Dashboard</div>
+                <div class="screen">
+                    <div class="status-bar">
+                        <span>2:15 PM</span>
+                        <span>92%</span>
+                    </div>
+                    <div class="content">
+                        <div class="welcome-section">
+                            <h2>Hello, Priya!</h2>
+                            <p>Your next transfusion is in 5 days</p>
+                        </div>
+                        
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number">23</div>
+                                <div class="stat-label">Successful Transfusions</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">47</div>
+                                <div class="stat-label">Active Donors</div>
+                            </div>
+                        </div>
+                        
+                        <div class="quick-actions">
+                            <div class="action-btn">
+                                <div class="action-icon">🩸</div>
+                                <div>Request Blood</div>
+                            </div>
+                            <div class="action-btn">
+                                <div class="action-icon">🏥</div>
+                                <div>Find Hospital</div>
+                            </div>
+                        </div>
+                        
+                        <div class="upcoming-section">
+                            <h3>Upcoming Appointments</h3>
+                            <div class="appointment-card">
+                                <div class="appointment-date">Dec 15, 2024 - 10:00 AM</div>
+                                <div class="appointment-details">Regular transfusion at Bombay Hospital<br>3 donors already confirmed</div>
+                            </div>
+                            <div class="appointment-card">
+                                <div class="appointment-date">Dec 29, 2024 - 2:30 PM</div>
+                                <div class="appointment-details">Follow-up consultation with Dr. Mehta<br>Blood work scheduled</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Donor Impact Dashboard -->
+            <div class="phone-mockup">
+                <div class="mockup-title">Donor Impact Dashboard</div>
+                <div class="screen">
+                    <div class="status-bar">
+                        <span>5:30 PM</span>
+                        <span>🔋 78%</span>
+                    </div>
+                    <div class="content">
+                        <div class="impact-header">
+                            <div class="impact-number">12</div>
+                            <p>Lives Saved Through Your Donations</p>
+                        </div>
+                        
+                        <div class="progress-section">
+                            <div class="progress-item">
+                                <div class="progress-label">
+                                    <span>Community Impact</span>
+                                    <span>Level 4 Hero</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div class="progress-item">
+                                <div class="progress-label">
+                                    <span>Monthly Goal</span>
+                                    <span>2/3 donations</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 67%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="achievement-grid">
+                            <div class="achievement-card">
+                                <div class="achievement-icon">🏆</div>
+                                <div class="achievement-title">Life Saver</div>
+                                <div style="font-size: 0.9rem; color: #666;">10+ donations</div>
+                            </div>
+                            <div class="achievement-card">
+                                <div class="achievement-icon">⚡</div>
+                                <div class="achievement-title">Quick Responder</div>
+                                <div style="font-size: 0.9rem; color: #666;">5 emergency helps</div>
+                            </div>
+                        </div>
+                        
+                        <div class="recent-donations">
+                            <h3 style="margin-bottom: 15px;">Recent Impact</h3>
+                            <div class="donation-item">
+                                <div class="donation-info">
+                                    <div class="donation-patient">Helped Arjun (8 years)</div>
+                                    <div class="donation-date">December 8, 2024</div>
+                                </div>
+                                <div class="donation-status">Completed</div>
+                            </div>
+                            <div class="donation-item">
+                                <div class="donation-info">
+                                    <div class="donation-patient">Helped Kavya (12 years)</div>
+                                    <div class="donation-date">November 23, 2024</div>
+                                </div>
+                                <div class="donation-status">Completed</div>
+                            </div>
+                            <div class="donation-item">
+                                <div class="donation-info">
+                                    <div class="donation-patient">Emergency: Saved Raj (15 years)</div>
+                                    <div class="donation-date">November 10, 2024</div>
+                                </div>
+                                <div class="donation-status">Completed</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hospital Analytics Dashboard -->
+            <div class="phone-mockup">
+                <div class="mockup-title">Hospital Analytics Dashboard</div>
+                <div class="screen">
+                    <div class="status-bar">
+                        <span>11:20 AM</span>
+                        <span>🔋 88%</span>
+                    </div>
+                    <div class="content">
+                        <div style="background: linear-gradient(135deg, #4facfe, #00f2fe); color: white; padding: 20px; border-radius: 15px; margin-bottom: 20px; text-align: center;">
+                            <h2>Bombay Hospital Mumbai</h2>
+                            <p>Blood Management</p>
+                        </div>
+                        
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number">156</div>
+                                <div class="stat-label">Active Patients</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">2,340</div>
+                                <div class="stat-label">Registered Donors</div>
+                            </div>
+                        </div>
+                        
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 12px; margin-bottom: 20px;">
+                            <h3 style="margin-bottom: 15px; color: #333;">AI Predictions</h3>
+                            <div style="background: white; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #007bff;">
+                                <div style="font-weight: 600; margin-bottom: 5px;">Next 7 Days Demand</div>
+                                <div style="font-size: 0.9rem; color: #666;">Expected: 45 units O+, 23 units B+, 18 units A+</div>
+                            </div>
+                            <div style="background: white; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #28a745;">
+                                <div style="font-weight: 600; margin-bottom: 5px;">Donor Availability</div>
+                                <div style="font-size: 0.9rem; color: #666;">98% coverage for routine, 87% for emergency</div>
+                            </div>
+                            <div style="background: white; padding: 12px; border-radius: 8px; border-left: 4px solid #ffc107;">
+                                <div style="font-weight: 600; margin-bottom: 5px;">Alert: Low B- Stock</div>
+                                <div style="font-size: 0.9rem; color: #666;">Recommend donor outreach in Borivali area</div>
+                            </div>
+                        </div>
+                        
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 12px;">
+                            <h3 style="margin-bottom: 15px; color: #333;">Recent Activity</h3>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #e9ecef;">
+                                <div>
+                                    <div style="font-weight: 600; margin-bottom: 2px;">Emergency Match: Priya S.</div>
+                                    <div style="font-size: 0.8rem; color: #666;">Found 3 donors in 23 seconds</div>
+                                </div>
+                                <div style="background: #28a745; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">Success</div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #e9ecef;">
+                                <div>
+                                    <div style="font-weight: 600; margin-bottom: 2px;">Scheduled: Arjun K.</div>
+                                    <div style="font-size: 0.8rem; color: #666;">Dec 15, donor pre-confirmed</div>
+                                </div>
+                                <div style="background: #007bff; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">Scheduled</div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0;">
+                                <div>
+                                    <div style="font-weight: 600; margin-bottom: 2px;">New Donor: Ravi M.</div>
+                                    <div style="font-size: 0.8rem; color: #666;">Registered via awareness campaign</div>
+                                </div>
+                                <div style="background: #17a2b8; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">New</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; color: white; margin-top: 40px;">
+            <p style="font-size: 1.1rem; margin-bottom: 10px;">🎯 <strong>BloodConnect AI: From Crisis to Prevention</strong></p>
+            <p style="opacity: 0.8;">Leveraging predictive intelligence to save lives and build stronger communities</p>
+        </div>
+    </div>
+</body>
+</html>
